@@ -20,3 +20,41 @@ body {
 .display-font {
   font-family: 'Playfair Display', serif;
 }
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+.orb-1 {
+  width: 65vw;
+  height: 65vw;
+  max-width: 700px;
+  max-height: 700px;
+  background: radial-gradient(circle, #0d2557 0%, transparent 70%);
+  top: -25%;
+  left: -20%;
+  opacity: 0.85;
+  animation-delay: 0s;
+}
+.orb-2 {
+  width: 50vw;
+  height: 50vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle, #091840 0%, transparent 70%);
+  bottom: -15%;
+  right: -15%;
+  opacity: 0.7;
+  animation-delay: -10s;
+}
+@keyframes drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(30px, 20px) scale(1.04);
+  }
+}
