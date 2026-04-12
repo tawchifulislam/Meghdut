@@ -1,3 +1,4 @@
+const API_KEY = '1c23bd48408c466e8a6163258261204';
 const $ = id => document.getElementById(id);
 
 const weatherEmojis = {
