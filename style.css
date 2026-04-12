@@ -143,3 +143,39 @@ body {
     transform: translateY(-12px);
   }
 }
+
+.stat-cell {
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 500;
+  color: #fff;
+}
+
+.label-text {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+}
+.sun-icon {
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1;
+  flex-shrink: 0;
+}
