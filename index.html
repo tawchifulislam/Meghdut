@@ -41,7 +41,22 @@
         <p id="errorMsg" class="hidden mt-3 text-red-400/80 text-sm font-light"></p>
       </div>
 
+      <div id="emptyState" class="fade-up" style="animation-delay:0.16s">
+        <div class="card p-10 sm:p-14 text-center">
+          <div class="text-5xl sm:text-6xl mb-5 opacity-25">◎</div>
+          <p class="display-font text-xl sm:text-2xl font-medium mb-3 opacity-50">No data yet</p>
+          <p class="text-white/25 text-sm sm:text-base leading-relaxed font-light">
+            Search any city above to see<br />live weather conditions.
+          </p>
+        </div>
+      </div>
 
+      <div id="loadingState" class="hidden">
+        <div class="card p-10 sm:p-14 text-center">
+          <div class="loading-ring mx-auto mb-5"></div>
+          <p class="text-white/30 text-sm font-light tracking-widest uppercase">Fetching conditions…</p>
+        </div>
+      </div>
 
     </div>
   </div>
