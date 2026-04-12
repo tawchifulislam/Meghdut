@@ -115,3 +115,15 @@ body {
   color: var(--gold);
   transform: translateX(4px);
 }
+
+.temp-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(68px, 14vw, 120px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1;
+  background: linear-gradient(160deg, #ffffff 30%, rgba(201, 169, 110, 0.55));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
