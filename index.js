@@ -33,3 +33,17 @@ const months = [
   'Nov',
   'Dec',
 ];
+
+function formatTime(unix, offset) {
+  const d = new Date((unix + offset) * 1000);
+  let h = d.getUTCHours(),
+    m = d.getUTCMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${h}:${String(m).padStart(2, '0')} ${ampm}`;
+}
+
+function formatDate(unix, offset) {
+  const d = new Date((unix + offset) * 1000);
+  return `${days[d.getUTCDay()]}, ${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+}
