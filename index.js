@@ -47,3 +47,19 @@ function formatDate(unix, offset) {
   const d = new Date((unix + offset) * 1000);
   return `${days[d.getUTCDay()]}, ${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
+
+function showError(msg) {
+  const el = $('errorMsg');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function hideError() {
+  $('errorMsg').classList.add('hidden');
+}
+
+function setLoading(on) {
+  $('loadingState').classList.toggle('hidden', !on);
+  $('emptyState').classList.add('hidden');
+  $('weatherCard').classList.add('hidden');
+}
