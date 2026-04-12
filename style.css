@@ -58,3 +58,11 @@ body {
     transform: translate(30px, 20px) scale(1.04);
   }
 }
+
+.card {
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+}
