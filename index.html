@@ -26,6 +26,22 @@
         <h1 class="display-font text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight">Meghdut</h1>
       </div>
 
+      <div class="mb-10 sm:mb-12 md:mb-14 fade-up" style="animation-delay:0.08s">
+        <div class="search-wrap">
+          <input id="cityInput" type="text" placeholder="Enter city name" class="search-field"
+            onkeydown="if(event.key==='Enter') fetchWeather()" autocomplete="off" />
+          <button onclick="fetchWeather()" class="search-arrow" aria-label="Search">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
+        <p id="errorMsg" class="hidden mt-3 text-red-400/80 text-sm font-light"></p>
+      </div>
+
+
 
     </div>
   </div>
