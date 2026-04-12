@@ -127,3 +127,19 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+.weather-icon {
+  font-size: clamp(52px, 10vw, 96px);
+  line-height: 1;
+  animation: float 5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 28px rgba(201, 169, 110, 0.22));
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
