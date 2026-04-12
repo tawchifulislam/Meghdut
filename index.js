@@ -34,15 +34,6 @@ const months = [
   'Dec',
 ];
 
-function formatTime(unix, offset) {
-  const d = new Date((unix + offset) * 1000);
-  let h = d.getUTCHours(),
-    m = d.getUTCMinutes();
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  h = h % 12 || 12;
-  return `${h}:${String(m).padStart(2, '0')} ${ampm}`;
-}
-
 function formatDate(unix, offset) {
   const d = new Date((unix + offset) * 1000);
   return `${days[d.getUTCDay()]}, ${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
@@ -74,16 +65,16 @@ async function fetchWeather() {
   try {
     const [currentRes, forecastRes] = await Promise.all([
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`,
+        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(city)}`,
       ),
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`,
+        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${encodeURIComponent(city)}&days=5`,
       ),
     ]);
 
     if (!currentRes.ok) {
       const err = await currentRes.json();
-      throw new Error(err.message || 'City not found');
+      throw new Error(err.error?.message || 'City not found');
     }
 
     const data = await currentRes.json();
@@ -101,50 +92,58 @@ async function fetchWeather() {
   }
 }
 
+function mapCondition(text) {
+  text = text.toLowerCase();
+  if (text.includes('thunder')) return 'Thunderstorm';
+  if (text.includes('drizzle') || text.includes('freezing')) return 'Drizzle';
+  if (text.includes('rain') || text.includes('shower')) return 'Rain';
+  if (
+    text.includes('snow') ||
+    text.includes('blizzard') ||
+    text.includes('sleet')
+  )
+    return 'Snow';
+  if (text.includes('fog')) return 'Fog';
+  if (text.includes('mist')) return 'Mist';
+  if (text.includes('haze')) return 'Haze';
+  if (text.includes('dust') || text.includes('sand')) return 'Dust';
+  if (text.includes('tornado')) return 'Tornado';
+  if (text.includes('overcast') || text.includes('cloud')) return 'Clouds';
+  if (text.includes('sunny') || text.includes('clear')) return 'Clear';
+  return 'Clear';
+}
+
 function renderWeather(data, forecast) {
-  const tz = data.timezone;
-  const main = data.weather[0].main;
+  const current = data.current;
+  const location = data.location;
+  const conditionText = current.condition.text;
+  const main = mapCondition(conditionText);
 
-  $('cityName').textContent = data.name;
+  $('cityName').textContent = location.name;
   $('countryDate').textContent =
-    `${data.sys.country} · ${formatDate(data.dt, tz)}`;
-  $('weatherDesc').textContent =
-    data.weather[0].description.charAt(0).toUpperCase() +
-    data.weather[0].description.slice(1);
-  $('tempDisplay').textContent = `${Math.round(data.main.temp)}°`;
+    `${location.country} · ${formatDate(location.localtime_epoch, 0)}`;
+  $('weatherDesc').textContent = conditionText;
+  $('tempDisplay').textContent = `${Math.round(current.temp_c)}°`;
   $('feelsLike').textContent =
-    `Feels like ${Math.round(data.main.feels_like)}°C`;
+    `Feels like ${Math.round(current.feelslike_c)}°C`;
   $('weatherIcon').textContent = weatherEmojis[main] || '🌡';
-  $('humidity').textContent = `${data.main.humidity}%`;
-  $('windSpeed').textContent = `${Math.round(data.wind.speed * 3.6)} km/h`;
-  $('visibility').textContent = data.visibility
-    ? `${(data.visibility / 1000).toFixed(1)} km`
-    : '—';
-  $('pressure').textContent = `${data.main.pressure} hPa`;
-  $('sunrise').textContent = formatTime(data.sys.sunrise, tz);
-  $('sunset').textContent = formatTime(data.sys.sunset, tz);
+  $('humidity').textContent = `${current.humidity}%`;
+  $('windSpeed').textContent = `${Math.round(current.wind_kph)} km/h`;
+  $('visibility').textContent = `${current.vis_km} km`;
+  $('pressure').textContent = `${current.pressure_mb} hPa`;
 
-  const dailyMap = {};
-  forecast.list.forEach(item => {
-    const d = new Date((item.dt + tz) * 1000);
-    const key = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
-    const hour = d.getUTCHours();
-    if (
-      !dailyMap[key] ||
-      Math.abs(hour - 12) <
-        Math.abs(new Date((dailyMap[key].dt + tz) * 1000).getUTCHours() - 12)
-    ) {
-      dailyMap[key] = item;
-    }
-  });
+  const astro = forecast.forecast.forecastday[0].astro;
+  $('sunrise').textContent = astro.sunrise;
+  $('sunset').textContent = astro.sunset;
 
-  const dailyItems = Object.values(dailyMap).slice(0, 5);
+  const dailyItems = forecast.forecast.forecastday.slice(0, 5);
 
   $('forecastContainer').innerHTML = dailyItems
     .map((item, i) => {
-      const d = new Date((item.dt + tz) * 1000);
+      const d = new Date(item.date_epoch * 1000);
       const day = days[d.getUTCDay()];
-      const emoji = weatherEmojis[item.weather[0].main] || '🌡';
+      const emoji =
+        weatherEmojis[mapCondition(item.day.condition.text)] || '🌡';
       const isFirst = i === 0;
       const bg = isFirst
         ? 'background:rgba(255,255,255,0.07); border:0.5px solid rgba(255,255,255,0.1);'
@@ -159,13 +158,12 @@ function renderWeather(data, forecast) {
         </p>
         <span style="font-size:clamp(20px,4vw,28px); line-height:1;">${emoji}</span>
         <p style="font-family:'Playfair Display',serif; font-size:clamp(14px,2.5vw,20px); font-weight:500; color:#fff;">
-          ${Math.round(item.main.temp)}°
+          ${Math.round(item.day.avgtemp_c)}°
         </p>
         <p style="font-size:clamp(9px,1.2vw,11px); color:rgba(255,255,255,0.22); text-align:center; line-height:1.4;">
-          ${Math.round(item.main.temp_min)}°<br/>${Math.round(item.main.temp_max)}°
+          ${Math.round(item.day.mintemp_c)}°<br/>${Math.round(item.day.maxtemp_c)}°
         </p>
-      </div>
-    `;
+      </div>`;
     })
     .join('');
 
