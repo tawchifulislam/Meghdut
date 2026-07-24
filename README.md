@@ -14,7 +14,7 @@
 
 [![Live Site](https://img.shields.io/badge/🌐%20Live%20Site-meghdut.vercel.app-c9a96e?style=for-the-badge&labelColor=080c18)](https://meghdut.vercel.app)
 [![GitHub](https://img.shields.io/badge/GitHub-tawchifulislam-white?style=for-the-badge&logo=github&labelColor=080c18)](https://github.com/tawchifulislam/Meghdut)
-[![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?style=for-the-badge&logo=netlify&labelColor=080c18)](https://meghdut-weather.netlify.app)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-00C7B7?style=for-the-badge&logo=netlify&labelColor=080c18)](https://meghdut.vercel.app)
 
 <br/>
 
