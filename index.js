@@ -1,4 +1,3 @@
-const API_KEY = '1c23bd48408c466e8a6163258261204';
 const $ = id => document.getElementById(id);
 
 const weatherEmojis = {
@@ -65,17 +64,13 @@ async function fetchWeather() {
 
   try {
     const [currentRes, forecastRes] = await Promise.all([
-      fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(city)}`,
-      ),
-      fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${encodeURIComponent(city)}&days=5`,
-      ),
+      fetch(`/api/weather?city=${encodeURIComponent(city)}&type=current`),
+      fetch(`/api/weather?city=${encodeURIComponent(city)}&type=forecast`),
     ]);
 
     if (!currentRes.ok) {
       const err = await currentRes.json();
-      throw new Error(err.error?.message || 'City not found');
+      throw new Error(err.error || 'City not found');
     }
 
     const data = await currentRes.json();
