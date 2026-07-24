@@ -70,7 +70,7 @@ function weatherIconSVG(main, { size = 48, strokeWidth = 1.6 } = {}) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 }
 
-/* Subtle background tint per condition group — keeps the dark/gold
+/* Subtle background tint per condition group - keeps the dark/gold
    identity but shifts the orb glow so the app feels reactive to conditions */
 const weatherThemes = {
   Clear: { orb1: '#3a2f12', orb2: '#4a3418' },

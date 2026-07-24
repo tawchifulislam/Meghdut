@@ -5,7 +5,7 @@
   --glass-border: rgba(255, 255, 255, 0.07);
   --bg: #080c18;
 
-  /* Reactive orb colors — updated by JS based on weather condition */
+  /* Reactive orb colors - updated by JS based on weather condition */
   --orb1-color: #0d2557;
   --orb2-color: #091840;
 }
@@ -156,7 +156,7 @@ body {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* Weather icon — static now (float animation removed, see design notes) */
+/* Weather icon - static now (float animation removed, see design notes) */
 .weather-icon {
   color: rgba(255, 255, 255, 0.92);
   filter: drop-shadow(0 4px 28px rgba(201, 169, 110, 0.22));

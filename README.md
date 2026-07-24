@@ -44,7 +44,7 @@ No React. No build tools. Just clean code and a refined UI.
 
 ```
 🌡  Real-time weather conditions
-📅  5-day daily forecast with min / max temps
+📅  3-day daily forecast with min / max temps
 🌅  Sunrise & Sunset times
 💨  Wind speed, Humidity, Pressure, Visibility
 ✨  Glassmorphism UI with gold accent tones
@@ -123,7 +123,7 @@ GET /v1/current.json?key=KEY&q=CITY
     → Real-time temperature, wind, humidity, pressure, visibility
 
 GET /v1/forecast.json?key=KEY&q=CITY&days=5
-    → 5-day forecast + sunrise & sunset (astro data)
+    → 3-day forecast + sunrise & sunset (astro data)
 ```
 
 ---
