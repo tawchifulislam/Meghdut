@@ -127,10 +127,33 @@ body {
   font-weight: 700;
   letter-spacing: -1px;
   line-height: 1.1;
+  font-feature-settings:
+    'lnum' 1,
+    'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
   background: linear-gradient(160deg, #ffffff 30%, rgba(201, 169, 110, 0.55));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.temp-num .deg {
+  font-size: 0.42em;
+  font-weight: 500;
+  vertical-align: 0.62em;
+  margin-left: 2px;
+  -webkit-text-fill-color: rgba(201, 169, 110, 0.75);
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 500;
+  color: #fff;
+  font-feature-settings:
+    'lnum' 1,
+    'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* Weather icon — static now (float animation removed, see design notes) */

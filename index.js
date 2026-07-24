@@ -259,7 +259,8 @@ function renderWeather(data, forecast) {
   $('countryDate').textContent =
     `${location.country} · ${formatDate(location.localtime_epoch, 0)}`;
   $('weatherDesc').textContent = conditionText;
-  $('tempDisplay').textContent = `${Math.round(current.temp_c)}°`;
+  $('tempDisplay').innerHTML =
+    `${Math.round(current.temp_c)}<span class="deg">°</span>`;
   $('feelsLike').textContent =
     `Feels like ${Math.round(current.feelslike_c)}°C`;
   $('weatherIcon').innerHTML = weatherIconSVG(main, { size: 72 });
