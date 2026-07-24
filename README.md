@@ -66,7 +66,7 @@ No React. No build tools. Just clean code and a refined UI.
 | Logic | `Vanilla JavaScript` |
 | Fonts | `Playfair Display` · `Outfit` |
 | Data | `WeatherAPI.com` |
-| Hosting | `Netlify` |
+| Hosting | `Vercel` |
 
 </div>
 
@@ -100,8 +100,6 @@ open index.html
 
 ---
 
-## ✦ &nbsp;Project Structure
-
 ```
 Meghdut/
 │
@@ -112,38 +110,9 @@ Meghdut/
 └── 🚫 .gitignore
 ```
 
----
-
-## ✦ &nbsp;API Endpoints
-
-Two endpoints from [WeatherAPI.com](https://www.weatherapi.com/docs/) power the app:
-
-```
-GET /v1/current.json?key=KEY&q=CITY
-    → Real-time temperature, wind, humidity, pressure, visibility
-
-GET /v1/forecast.json?key=KEY&q=CITY&days=5
-    → 3-day forecast + sunrise & sunset (astro data)
-```
-
----
-
 ## ✦ &nbsp;Design Philosophy
 
 > *Less noise. More signal.*
 
 Meghdut was built around one idea - weather data should feel calm, not chaotic. The dark background, Playfair Display typeface, muted gold accents, and subtle glassmorphism all serve that single purpose.
 
----
-
-<div align="center">
-
----
-
-Made with care by **[Tawchiful Islam](https://github.com/tawchifulislam)**
-
-*If you like this project, consider leaving a ⭐ on GitHub.*
-
----
-
-</div>
